@@ -1,8 +1,10 @@
 from pico2d import*
 
 import stage_state
+
+import button
 #버튼 추가
-class UI:
+class Result_UI:
     def __init__(self):
         self.number0_image = load_image('Image\\Number\\0.png')
         self.number1_image = load_image('Image\\Number\\1.png')
@@ -15,11 +17,16 @@ class UI:
         self.number8_image = load_image('Image\\Number\\8.png')
         self.number9_image = load_image('Image\\Number\\9.png')
 
-        self.jelly_image = load_image('Image\\item_Jelly.png')
-        self.hp_image = load_image('Image\\hp.png')
-        self.big_image = load_image('Image\\big_icon.png')
-        self.hpup_image = load_image('Image\\hp_icon.png')
+        #마지막 결과창
+        self.result_image = load_image('Image\\result.png')
 
+
+        #버튼 1개 추가
+        self.button_ui = button.Button()
+        self.button_ui.enter()
+
+
+        #플레이어의 점수 받아오기
         self.playerscore = 0
 
 
@@ -32,31 +39,23 @@ class UI:
 
 
     def update(self, _events):
-        pass
+        # 점수가져오기
+        self.playerscore = (int)(stage_state.player.jellyCount)
 
+        #버튼 눌리면 True 반환
+        if self.button_ui.update(_events):
+            return True
+        else:
+            return False
 
     def draw(self):
-        if (stage_state.player.lifecount > 0):
-            #플레이어의 체력상태
-            temprate = (int)(200 * (stage_state.player.lifecount / 300.0))
-            self.hp_image.clip_draw(0, 0,
-                                    temprate * 2, 64,
-                                    temprate + 50, 550)
+        self.result_image.draw(400, 300)
 
-            # 점수가져오기
-            self.playerscore = (int)(stage_state.player.jellyCount)
+        self.score_draw((int)(self.playerscore / 100), 350, 345)
+        self.score_draw((int)(self.playerscore % 100 / 10), 400, 345)
+        self.score_draw((int)(self.playerscore % 10), 450, 345)
 
-            #젤리카운트 draw
-            self.jelly_image.draw(600, 550)
-            self.score_draw((int)(self.playerscore / 100), 650, 550)
-            self.score_draw((int)(self.playerscore % 100 / 10), 700, 550)
-            self.score_draw((int)(self.playerscore % 10), 750, 550)
-
-            if stage_state.player.bigCount > 100:
-                self.big_image.draw(400, 300)
-
-            if stage_state.player.eatLifecount > 0:
-                self.hpup_image.draw(400, 300)
+        self.button_ui.draw()
 
 
     def exit(self):
@@ -71,10 +70,9 @@ class UI:
         del (self.number8_image)
         del (self.number9_image)
 
-        del (self.jelly_image)
-        del (self.big_image)
-        del (self.hp_image)
-        del (self.hpup_image)
+        del (self.result_image)
+
+        del (self.button_ui)
 
 
     def score_draw(self, number, x, y):

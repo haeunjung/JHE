@@ -38,6 +38,9 @@ def update():
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_RETURN):
                 game_framework.change_state(stage_state)
                 return
+            elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
+                game_framework.change_state(stage_state)
+                return
 
 def draw():
     global titleimage, titleimage_kakao, titleimage_CI,title_logo_time
@@ -60,5 +63,3 @@ def handle_events():
         else:
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
-            elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                game_framework.change_state(stage_state)

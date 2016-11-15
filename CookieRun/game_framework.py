@@ -1,5 +1,7 @@
 from pico2d import*
 
+import manager_effect_sound
+
 running = None
 stack = None
 

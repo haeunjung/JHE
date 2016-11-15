@@ -1,11 +1,6 @@
 from pico2d import*
 
-import stage_state
-import collision
-
 class Cookie:
-    #RUN, JUMP, SLIDE, COLLISION, DEAD = 0, 1, 2, 3, 4
-
     def __init__(self):
         self.x, self.y = 135, 142
         self.sizeX, self.sizeY = 50, 80
@@ -37,19 +32,22 @@ class Cookie:
         self.exit()
 
     def enter(self):
-        pass
+        self.isFinishDead = False
 
-    def update(self, _event):
+    def update(self, _events):
         #죽는지 확인
         if self.isDead == False:
             self.lifecount -= 0.3
-        elif self.isDead:
+        elif (self.isDead) and (self.isFinishDead == False):
             # 죽음
             self.frame += 1
             self.deadframe = (int)(self.frame / 8 % 4)
             if self.frame > 28:
+                self.isFinishDead = True
                 return True
             return False
+        elif self.isFinishDead == True:
+            return True
         if self.lifecount < 0:
             self.isDead = True
             self.lifecount = 0
@@ -57,7 +55,7 @@ class Cookie:
 
 
         #키체크
-        for event in _event:
+        for event in _events:
             if event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
                 if self.isJump == False:
                     self.isJump = True
@@ -110,9 +108,6 @@ class Cookie:
                 self.bigCount = 0
                 self.isBig = False
                 self.sizeX, self.sizeY = 50, 80
-
-        #충돌처리
-        self.collision_all()
 
 
     def draw(self):
@@ -182,30 +177,3 @@ class Cookie:
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
-
-
-    def collision_all(self):
-        for i in stage_state.hurdle_jelly_List:
-            for j in stage_state.hurdle_jelly_List[i]:
-                if i == 0:
-                    if (collision.collisionAB(self, j)):
-                        if self.isBig:
-                            stage_state.hurdle_jelly_List[i].remove(j)
-                        elif self.isBig == False:
-                            self.isHurdleCollision, self.hurdleCollisionCount = True, 20
-                            self.lifecount -= 10.0
-                elif i == 1:
-                    if (collision.collisionAB(self, j)):
-                        if j.type == 0:
-                            self.isBig = True
-                            self.bigCount = 150
-                            self.sizeX, self.sizeY = 240, 300
-                        elif j.type == 1:
-                            self.jellyCount += j.ability
-                        elif j.type == 2:
-                            self.lifecount += j.ability
-                            self.eatLifecount = 50
-                            if self.lifecount > 300.0:
-                                self.lifecount = 300.0
-                        #삭제
-                        stage_state.hurdle_jelly_List[i].remove(j)

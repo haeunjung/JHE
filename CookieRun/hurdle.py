@@ -19,6 +19,9 @@ class Hurdle:
             elif self.imagetype == 1:
                 self.sizeX, self.sizeY = 120, 448
                 self.image = load_image('Image\\Stage1_Fork2.png')
+
+
+
             #y좌표 조정
             self.y = 600 - (self.sizeY / 2)
         elif self.type == 1:
@@ -26,13 +29,13 @@ class Hurdle:
                 self.sizeX, self.sizeY = 34, 50
                 self.image = load_image('Image\\Stage1_thorn.png')
             elif self.imagetype == 1:
-                self.sizeX, self.sizeY = 42, 94
+                self.sizeX, self.sizeY = 42, 60
                 self.image = load_image('Image\\Stage1_thorn2.png')
             elif self.imagetype == 2:
                 self.sizeX, self.sizeY = 30, 50
                 self.image = load_image('Image\\Stage1_thorn3.png')
             elif self.imagetype == 3:
-                self.sizeX, self.sizeY = 42, 78
+                self.sizeX, self.sizeY = 42, 60
                 self.image = load_image('Image\\Stage1_thorn4.png')
             # y좌표 조정
             self.y = 100 + (self.sizeY / 2)

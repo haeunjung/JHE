@@ -1,7 +1,6 @@
 from pico2d import*
 
 class Jelly:
-
     def __init__(self, _x = 0, _y = 0, _type = 0):
         self.x, self.y = _x, _y
         self.sizeX, self.sizeY = 26, 34
