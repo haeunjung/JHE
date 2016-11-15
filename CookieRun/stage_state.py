@@ -193,11 +193,9 @@ def load_map_data():
     temphurdle = hurdle.Hurdle(2000, 0, 1)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
-
     temphurdle = hurdle.Hurdle(2200, 0, 1)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
-
     temphurdle = hurdle.Hurdle(2400, 0, 1)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
@@ -205,12 +203,26 @@ def load_map_data():
     temphurdle = hurdle.Hurdle(3300, 0, 1)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
-
     temphurdle = hurdle.Hurdle(3600, 0, 1)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
-
     temphurdle = hurdle.Hurdle(3900, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(5200, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(5300, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(5400, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(5500, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(5600, 0, 0)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
 
@@ -222,20 +234,35 @@ def load_map_data():
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
 
-    temphurdle = hurdle.Hurdle(2600, 1, 2)  # 타입 + 이미지스타일
+    temphurdle = hurdle.Hurdle(2600, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(2800, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(3000, 1, 3)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
 
-    temphurdle = hurdle.Hurdle(2800, 1, 2)  # 타입 + 이미지스타일
+    temphurdle = hurdle.Hurdle(4600, 1, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(4800, 1, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(5000, 1, 0)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
 
-    temphurdle = hurdle.Hurdle(3000, 1, 2)  # 타입 + 이미지스타일
+    temphurdle = hurdle.Hurdle(5800, 1, 2)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(6200, 1, 2)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
 
     # 젤리추가
-    tempjelly = jelly.Jelly(1000, 130, 0)  # 마지막은 타입
+    tempjelly = jelly.Jelly(1000, 130, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
 
@@ -253,6 +280,7 @@ def load_map_data():
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(1600, 130, 1)  # 마지막은 타입
     tempjelly.enter()
+
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(2000, 130, 1)  # 마지막은 타입
     tempjelly.enter()
@@ -292,6 +320,7 @@ def load_map_data():
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(2550, 130, 1)  # 마지막은 타입
     tempjelly.enter()
+
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(2650, 130, 1)  # 마지막은 타입
     tempjelly.enter()
@@ -310,6 +339,7 @@ def load_map_data():
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(2950, 130, 1)  # 마지막은 타입
     tempjelly.enter()
+
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(3400, 180, 1)  # 마지막은 타입
     tempjelly.enter()
@@ -319,6 +349,7 @@ def load_map_data():
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(3500, 180, 1)  # 마지막은 타입
     tempjelly.enter()
+
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(3700, 180, 1)  # 마지막은 타입
     tempjelly.enter()
@@ -328,38 +359,137 @@ def load_map_data():
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(3800, 180, 1)  # 마지막은 타입
     tempjelly.enter()
+
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4100, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4100, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4150, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4150, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4200, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4200, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4250, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4250, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4300, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4300, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4350, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4350, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4400, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4400, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4450, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4450, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4500, 180, 1)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4500, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(4650, 150, 1)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(4700, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(4750, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(4850, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(4900, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(4950, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5200, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5250, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5300, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5350, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5400, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5450, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5500, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5550, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5600, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5650, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5700, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    tempjelly = jelly.Jelly(5850, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5900, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5950, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6000, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6050, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6100, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6150, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    tempjelly = jelly.Jelly(6350, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6400, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6450, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6500, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6550, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6600, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(6650, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
 
     tempjelly = jelly.Jelly(2000, 130, 2)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(4050, 180, 2)  # 마지막은 타입
+    tempjelly = jelly.Jelly(4050, 150, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(5100, 130, 0)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
