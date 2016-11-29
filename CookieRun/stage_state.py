@@ -526,6 +526,9 @@ def load_map_data():
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(7250, 150, 1)  # 마지막은 타입
     tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(7300, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
 
 
 
