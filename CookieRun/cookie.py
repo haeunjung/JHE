@@ -1,9 +1,13 @@
 from pico2d import*
 import manager_effect_sound
+import stage_state
+
+DIR_RIGHT, DIR_LEFT = 0, 1
+MAP_SIZE = 12000
 
 class Cookie:
     def __init__(self):
-        self.x, self.y = 135, 142
+        self.x, self.y = 135, 142   #시작점이 135 / 카메라는 0
         self.sizeX, self.sizeY = 50, 80
         self.cameraX = 0
         self.frame, self.deadframe = 0, 0
@@ -14,6 +18,9 @@ class Cookie:
         self.isCollisionBox = False
         self.isHurdleCollision, self.hurdleCollisionCount = False, 0
 
+        #방향추가
+        self.dir = DIR_RIGHT
+
         #일반이미지
         self.run_image = load_image('Image\\stage1_cookie\\cookie_run.png')
         self.jump_image_up = load_image('Image\\stage1_cookie\\cookie_run_jump2.png')
@@ -21,13 +28,25 @@ class Cookie:
         self.sliding_image = load_image('Image\\stage1_cookie\\cookie_run_slide.png')
         self.collision_image = load_image('Image\\stage1_cookie\\cookie_run_collid2.png')
         self.dead_image = load_image('Image\\stage1_cookie\\cookie_run_dead.png')
-
         #빅이 되었을경우의 이미지들
         self.run_bigimage = load_image('Image\\stage1_cookie\\cookie_run_big.png')
         self.jump_bigimage_up = load_image('Image\\stage1_cookie\\cookie_run_jump2_big.png')
         self.jump_bigimage_down = load_image('Image\\stage1_cookie\\cookie_run_jump_big.png')
         self.sliding_bigimage = load_image('Image\\stage1_cookie\\cookie_run_slide_big.png')
 
+
+        # 반대 일반이미지
+        self.rev_run_image = load_image('Image\\stage2_cookie\\cookie_run.png')
+        self.rev_jump_image_up = load_image('Image\\stage2_cookie\\cookie_run_jump2.png')
+        self.rev_jump_image_down = load_image('Image\\stage2_cookie\\cookie_run_jump.png')
+        self.rev_sliding_image = load_image('Image\\stage2_cookie\\cookie_run_slide.png')
+        self.rev_collision_image = load_image('Image\\stage2_cookie\\cookie_run_collid2.png')
+        self.rev_dead_image = load_image('Image\\stage2_cookie\\cookie_run_dead.png')
+        # 반대 빅이 되었을경우의 이미지들
+        self.rev_run_bigimage = load_image('Image\\stage2_cookie\\cookie_run_big.png')
+        self.rev_jump_bigimage_up = load_image('Image\\stage2_cookie\\cookie_run_jump2_big.png')
+        self.rev_jump_bigimage_down = load_image('Image\\stage2_cookie\\cookie_run_jump_big.png')
+        self.rev_sliding_bigimage = load_image('Image\\stage2_cookie\\cookie_run_slide_big.png')
 
     def __del__(self):
         self.exit()
@@ -53,6 +72,18 @@ class Cookie:
             self.isDead = True
             self.lifecount = 0
             self.frame = 0
+
+        #방향전환
+        if (self.dir == DIR_RIGHT) and ((self.x - self.cameraX) > (800 - 135)):
+            self.x = self.cameraX + (800 - 135)
+            self.dir = DIR_LEFT
+            self.frame = 0
+            stage_state.load_reverse_map_data()
+        elif (self.dir == DIR_LEFT) and ((self.x - self.cameraX) < 135):
+            self.x = self.cameraX + 135
+            self.dir = DIR_RIGHT
+            self.frame = 0
+            stage_state.load_map_data()
 
 
         #키체크
@@ -82,16 +113,34 @@ class Cookie:
         #움직임
         if self.isHurdleCollision:
             if self.hurdleCollisionCount == 20:
-                self.x -= 10 * 50 * _frametime
-                self.cameraX -= 10 * 50 * _frametime
+                if self.dir == DIR_RIGHT:
+                    self.x -= 30
+                    self.cameraX -= 30
+                elif self.dir == DIR_LEFT:
+                    self.x += 30
+                    self.cameraX += 30
 
             self.hurdleCollisionCount -= 1
             if self.hurdleCollisionCount < 0:
                 self.hurdleCollisionCount = 0
                 self.isHurdleCollision = False
         elif (self.lifecount > 0):
-            self.x += 8
-            self.cameraX += 8
+
+            #이부분을 바꿔야함 + 스크롤링
+            if self.dir == DIR_RIGHT:
+                self.x += 6 * 50 * _frametime
+                if self.x > MAP_SIZE:
+                    pass
+                else:
+                    self.cameraX += 6 * 50 * _frametime
+            elif self.dir == DIR_LEFT:
+                self.x -= 6 * 50 * _frametime
+                if self.x < 0:
+                    pass
+                else:
+                    self.cameraX -= 6 * 50 * _frametime
+
+
             if self.isJump:
                 self.jumpCount += 1
                 if self.jumpCount == 24:
@@ -114,30 +163,58 @@ class Cookie:
 
 
     def draw(self):
-        if self.isDead:
-            self.dead_image.clip_draw(self.deadframe * 100, 0, 100, 100, self.x - self.cameraX, self.y + 10)
-        elif self.isHurdleCollision:
-            self.collision_image.clip_draw(self.frame * 53, 0, 53, 81, self.x - self.cameraX, self.y)
-        elif (self.isJump == False) and (self.isSliding == False):
-            if self.isBig:
-                self.run_bigimage.clip_draw(self.frame * 300, 0, 300, 348, self.x - self.cameraX, self.y + 130)
-            elif self.isBig == False:
-                self.run_image.clip_draw(self.frame * 75, 0, 75, 87, self.x - self.cameraX, self.y)
-        elif (self.isJump) and (self.jumpCount < 12):
-            if self.isBig:
-                self.jump_bigimage_up.draw(self.x - self.cameraX, self.y + 130)
-            elif self.isBig == False:
-                self.jump_image_up.draw(self.x - self.cameraX, self.y)
-        elif self.isJump:
-            if self.isBig:
-                self.jump_bigimage_down.draw(self.x - self.cameraX, self.y + 130)
-            elif self.isBig == False:
-                self.jump_image_down.draw(self.x - self.cameraX, self.y)
-        elif self.isSliding:
-            if self.isBig:
-                self.sliding_bigimage.draw(self.x - self.cameraX, self.y + 50)  # 슬라이딩 값 보정
-            elif self.isBig == False:
-                self.sliding_image.draw(self.x - self.cameraX, self.y - 20)#슬라이딩 값 보정
+        if self.dir == DIR_RIGHT:
+            if self.isDead:
+                self.dead_image.clip_draw(self.deadframe * 100, 0, 100, 100, self.x - self.cameraX, self.y + 10)
+            elif self.isHurdleCollision:
+                self.collision_image.clip_draw(self.frame * 53, 0, 53, 81, self.x - self.cameraX, self.y)
+            elif (self.isJump == False) and (self.isSliding == False):
+                if self.isBig:
+                    self.run_bigimage.clip_draw(self.frame * 300, 0, 300, 348, self.x - self.cameraX, self.y + 130)
+                elif self.isBig == False:
+                    self.run_image.clip_draw(self.frame * 75, 0, 75, 87, self.x - self.cameraX, self.y)
+            elif (self.isJump) and (self.jumpCount < 12):
+                if self.isBig:
+                    self.jump_bigimage_up.draw(self.x - self.cameraX, self.y + 130)
+                elif self.isBig == False:
+                    self.jump_image_up.draw(self.x - self.cameraX, self.y)
+            elif self.isJump:
+                if self.isBig:
+                    self.jump_bigimage_down.draw(self.x - self.cameraX, self.y + 130)
+                elif self.isBig == False:
+                    self.jump_image_down.draw(self.x - self.cameraX, self.y)
+            elif self.isSliding:
+                if self.isBig:
+                    self.sliding_bigimage.draw(self.x - self.cameraX, self.y + 50)  # 슬라이딩 값 보정
+                elif self.isBig == False:
+                    self.sliding_image.draw(self.x - self.cameraX, self.y - 20)#슬라이딩 값 보정
+
+        elif self.dir == DIR_LEFT:
+            if self.isDead:
+                self.rev_dead_image.clip_draw(self.deadframe * 100, 0, 100, 100, self.x - self.cameraX, self.y + 10)
+            elif self.isHurdleCollision:
+                self.rev_collision_image.clip_draw(self.frame * 53, 0, 53, 81, self.x - self.cameraX, self.y)
+            elif (self.isJump == False) and (self.isSliding == False):
+                if self.isBig:
+                    self.rev_run_bigimage.clip_draw(self.frame * 300, 0, 300, 348, self.x - self.cameraX, self.y + 130)
+                elif self.isBig == False:
+                    self.rev_run_image.clip_draw(self.frame * 75, 0, 75, 87, self.x - self.cameraX, self.y)
+            elif (self.isJump) and (self.jumpCount < 12):
+                if self.isBig:
+                    self.rev_jump_bigimage_up.draw(self.x - self.cameraX, self.y + 130)
+                elif self.isBig == False:
+                    self.rev_jump_image_up.draw(self.x - self.cameraX, self.y)
+            elif self.isJump:
+                if self.isBig:
+                    self.rev_jump_bigimage_down.draw(self.x - self.cameraX, self.y + 130)
+                elif self.isBig == False:
+                    self.rev_jump_image_down.draw(self.x - self.cameraX, self.y)
+            elif self.isSliding:
+                if self.isBig:
+                    self.rev_sliding_bigimage.draw(self.x - self.cameraX, self.y + 50)  # 슬라이딩 값 보정
+                elif self.isBig == False:
+                    self.rev_sliding_image.draw(self.x - self.cameraX, self.y - 20)#슬라이딩 값 보정
+
 
         if self.isCollisionBox:
             self.draw_bb()

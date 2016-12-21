@@ -17,8 +17,10 @@ import manager_effect_sound
 stageBack_image = None
 stageLand_image = None
 
+MAP_SIZE = 12000
 scrollX = 0
 
+isFirst = True
 isResultUI = None
 isGameEnd = None
 keyevents = None
@@ -43,8 +45,18 @@ def enter():
     isGameEnd = False
     isResultUI = False
 
+    global gBGM1, gBGM2
+    gBGM1 = load_music('Sound/Stage1.mp3')
+    gBGM1.set_volume(32)
+    gBGM2 = load_music('Sound/Stage2.mp3')
+    gBGM2.set_volume(32)
+
+
     #맵데이터 가져오기
+    global isFirst
+    isFirst = True
     load_map_data()
+    isFirst = False
 
     global player, player_ui, player_result_ui
     player = cookie.Cookie()
@@ -54,13 +66,6 @@ def enter():
     player_result_ui = result_ui.Result_UI()
     player_result_ui.enter()
 
-    global gBGM1, gBGM2
-    gBGM1 = load_music('Sound/Stage1.mp3')
-    gBGM1.set_volume(32)
-    gBGM1.repeat_play() #첫번째 음악 실행
-    gBGM2 = load_music('Sound/Stage2.mp3')
-    gBGM2.set_volume(32)
-    #gBGM2.repeat_play() #두번째 음악은 대기
 
 def exit():
     global stageBack_image, stageLand_image
@@ -193,20 +198,676 @@ def handle_events():
                 game_framework.quit()
 
 
-
-def load_map_data():
+def clear_map_data():
     global hurdle_jelly_List
 
-    # json 예제
-    # hurdle_file = open('MapData\\FirstHurdleData.txt', 'r')
-    # hurdle_data = json.load(hurdle_file)
-    # hurdle_file.close()
+    # 허들젤리리스트 삭제
+    for i in hurdle_jelly_List:
+        for j in hurdle_jelly_List[i]:
+            hurdle_jelly_List[i].remove(j)
 
-    # jelly_file = open('MapData\\FirstJellyData.txt', 'r')
-    # jelly_data = json.load(jelly_file)
-    # jelly_file.close()
+
+def load_reverse_map_data():
+    # 초기화
+    clear_map_data()
+
+    global gBGM2
+    gBGM2.repeat_play()
+
+    global hurdle_jelly_List
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 1000, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List = {HURDLE: [temphurdle], JELLY: []}
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 2000, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 2200, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 2400, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 3300, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 3600, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 3900, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 5200, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 5300, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 5400, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 5500, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 5600, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 7400, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 7500, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 8250, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 8350, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 9300, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 9400, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 9500, 0, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 9600, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 10300, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 10400, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 1300, 1, 2)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 1700, 1, 2)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 2600, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 2800, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 3000, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 4600, 1, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 4800, 1, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 5000, 1, 0)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 5800, 1, 2)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 6200, 1, 2)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 6780, 1, 2)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 7030, 1, 2)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 7780, 1, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 8030, 1, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 8550, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 8750, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 8950, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 9800, 1, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 9900, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 10000, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(MAP_SIZE - 10100, 1, 3)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+
+    # 젤리추가
+    tempjelly = jelly.Jelly(MAP_SIZE - 1000, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1050, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1100, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1150, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1200, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1250, 170, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1300, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1350, 170, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1400, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1450, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1500, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1550, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1600, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1650, 170, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1700, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1750, 170, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1800, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1850, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1900, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 1950, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2000, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2050, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2050, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2100, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2150, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2200, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2250, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2300, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2350, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2400, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2450, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2500, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2550, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2650, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2700, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2750, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2850, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2900, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 2950, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 3400, 180, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 3450, 180, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 3500, 180, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 3700, 180, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 3750, 180, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 3800, 180, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4100, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4150, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4200, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4250, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4300, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4350, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4400, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4450, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4500, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4650, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4700, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4750, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4850, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4900, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4950, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5200, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5250, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5300, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5350, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5400, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5450, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5500, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5550, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5600, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5650, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5700, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    tempjelly = jelly.Jelly(MAP_SIZE - 5850, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5900, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5950, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6000, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6050, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6100, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6150, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    tempjelly = jelly.Jelly(MAP_SIZE - 6350, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6400, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6450, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6500, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6550, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6600, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6650, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6700, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6750, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6800, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6850, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6900, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 6950, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7000, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7050, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7100, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7150, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7200, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7250, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7300, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7350, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7400, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7450, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7500, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7550, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7600, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7650, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7700, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7750, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7850, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7900, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7950, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8000, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8050, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8100, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8150, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8200, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8250, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8300, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8350, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8400, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8450, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8500, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8550, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8600, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8650, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8700, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8750, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8800, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8850, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8900, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 8950, 220, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9000, 190, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9050, 150, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9100, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9150, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9200, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9300, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9350, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9400, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9450, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9500, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9550, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9600, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9650, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9700, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9750, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10200, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10250, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10300, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10350, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10400, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10450, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10500, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10550, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10600, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+
+
+    tempjelly = jelly.Jelly(MAP_SIZE - 2000, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 4050, 150, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 5100, 130, 0)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 7800, 220, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9250, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 9700, 130, 0)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10150, 130, 0)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10800, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+
+
+def load_map_data():
+    #초기화
+    global isFirst
+    if isFirst == False:
+        clear_map_data()
+
+    global gBGM1
+    gBGM1.repeat_play()
 
     # 허들리스트
+    global hurdle_jelly_List
     temphurdle = hurdle.Hurdle(1000, 0, 0)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List = {HURDLE: [temphurdle], JELLY: []}
@@ -842,5 +1503,8 @@ def load_map_data():
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(10150, 130, 0)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10800, 130, 0)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
