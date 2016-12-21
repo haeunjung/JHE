@@ -17,7 +17,7 @@ import manager_effect_sound
 stageBack_image = None
 stageLand_image = None
 
-MAP_SIZE = 12000
+MAP_SIZE = 11000
 scrollX = 0
 
 isFirst = True
@@ -852,7 +852,16 @@ def load_reverse_map_data():
     tempjelly = jelly.Jelly(MAP_SIZE - 10150, 130, 0)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10700, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(MAP_SIZE - 10800, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 10900, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(MAP_SIZE - 11000, 130, 2)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
 
@@ -1505,6 +1514,15 @@ def load_map_data():
     tempjelly = jelly.Jelly(10150, 130, 0)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
-    tempjelly = jelly.Jelly(10800, 130, 0)  # 마지막은 타입
+    tempjelly = jelly.Jelly(10700, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10800, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10900, 130, 2)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(11000, 130, 2)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)

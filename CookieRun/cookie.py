@@ -3,7 +3,7 @@ import manager_effect_sound
 import stage_state
 
 DIR_RIGHT, DIR_LEFT = 0, 1
-MAP_SIZE = 12000
+MAP_SIZE = 11000
 
 class Cookie:
     def __init__(self):
