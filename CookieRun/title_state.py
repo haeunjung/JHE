@@ -9,6 +9,8 @@ titleimage = None
 title_logo_time = 3.0
 keyevents = None
 
+gBGM = None
+
 def enter():
     global titleimage_kakao, titleimage_CI, titleimage
 
@@ -19,14 +21,22 @@ def enter():
     global title_logo_time
     title_logo_time = 3.0
 
+    global gBGM
+    gBGM = load_music('Sound/Start.mp3')
+    gBGM.set_volume(32)
+    gBGM.repeat_play()
+
 def exit():
     global titleimage_kakao, titleimage_CI, titleimage
     del (titleimage_kakao)
     del (titleimage_CI)
     del (titleimage)
 
+    global gBGM
+    del (gBGM)
 
-def update():
+
+def update(_frametime):
     global title_logo_time, keyevents
 
     title_logo_time -= 0.01

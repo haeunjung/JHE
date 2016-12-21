@@ -46,12 +46,19 @@ def run(start_state):
 
     open_canvas()
 
+    current_time = get_time()
+    manager_effect_sound.load_effect_sound()
+
     stack = [start_state]
     start_state.enter()
 
     while (running):
         stack[-1].handle_events()
-        stack[-1].update()
+
+        frame_time = get_time() - current_time
+        stack[-1].update(frame_time)
+        current_time += frame_time
+
         stack[-1].draw()
 
         delay(0.02)

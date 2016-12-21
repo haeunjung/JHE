@@ -12,6 +12,7 @@ import ui
 import result_ui
 
 import collision
+import manager_effect_sound
 
 stageBack_image = None
 stageLand_image = None
@@ -28,6 +29,9 @@ player_result_ui = None
 
 HURDLE, JELLY = 0, 1
 hurdle_jelly_List = None
+
+gBGM1 = None
+gBGM2 = None
 
 def enter():
     global stageBack_image, stageLand_image
@@ -50,11 +54,22 @@ def enter():
     player_result_ui = result_ui.Result_UI()
     player_result_ui.enter()
 
+    global gBGM1, gBGM2
+    gBGM1 = load_music('Sound/Stage1.mp3')
+    gBGM1.set_volume(32)
+    gBGM1.repeat_play() #첫번째 음악 실행
+    gBGM2 = load_music('Sound/Stage2.mp3')
+    gBGM2.set_volume(32)
+    #gBGM2.repeat_play() #두번째 음악은 대기
 
 def exit():
     global stageBack_image, stageLand_image
     del (stageBack_image)
     del (stageLand_image)
+
+    global gBGM1, gBGM2
+    del (gBGM1)
+    del (gBGM2)
 
     #플레이어 삭제
     global player, player_ui, player_result_ui
@@ -69,7 +84,7 @@ def exit():
             hurdle_jelly_List[i].remove(j)
 
 
-def update():
+def update(_frametime):
     global scrollX, isGameEnd, isResultUI, keyevents
 
     #게임의 종료
@@ -84,10 +99,11 @@ def update():
 
     # 플레이어
     global player
-    if player.update(keyevents):
+    if player.update(_frametime, keyevents):
         #게임의 종료
         if isResultUI == False:
             #마지막 배너 추가
+            manager_effect_sound.CallEffectSound('END')
             isResultUI = True
         return
 
@@ -104,20 +120,25 @@ def update():
                 if (collision.collisionAB(player, j)):
                     if player.isBig:
                         hurdle_jelly_List[i].remove(j)
+                        manager_effect_sound.CallEffectSound('BIG_HIT')
                     elif player.isBig == False:
                         player.isHurdleCollision, player.hurdleCollisionCount = True, 20
                         player.lifecount -= 10.0
+                        manager_effect_sound.CallEffectSound('COLLISION')
             elif i == 1:
                 if (collision.collisionAB(player, j)):
                     if j.type == 0:
                         player.isBig = True
                         player.bigCount = 150
                         player.sizeX, player.sizeY = 240, 300
+                        manager_effect_sound.CallEffectSound('BIG')
                     elif j.type == 1:
                         player.jellyCount += j.ability
+                        manager_effect_sound.CallEffectSound('JELLY')
                     elif j.type == 2:
                         player.lifecount += j.ability
                         player.eatLifecount = 50
+                        manager_effect_sound.CallEffectSound('LARGE_JELLY')
                         if player.lifecount > 300.0:
                             player.lifecount = 300.0
                     # 삭제
@@ -247,6 +268,12 @@ def load_map_data():
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
     temphurdle = hurdle.Hurdle(9600, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(10300, 0, 1)  # 타입 + 이미지스타일
+    temphurdle.enter()
+    hurdle_jelly_List[HURDLE].append(temphurdle)
+    temphurdle = hurdle.Hurdle(10400, 0, 1)  # 타입 + 이미지스타일
     temphurdle.enter()
     hurdle_jelly_List[HURDLE].append(temphurdle)
 
@@ -767,6 +794,33 @@ def load_map_data():
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(9750, 130, 1)  # 마지막은 타입
     tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10200, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10250, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10300, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10350, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10400, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10450, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10500, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10550, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10600, 130, 1)  # 마지막은 타입
+    tempjelly.enter()
 
 
     tempjelly = jelly.Jelly(2000, 130, 2)  # 마지막은 타입
@@ -785,5 +839,8 @@ def load_map_data():
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)
     tempjelly = jelly.Jelly(9700, 130, 0)  # 마지막은 타입
+    tempjelly.enter()
+    hurdle_jelly_List[JELLY].append(tempjelly)
+    tempjelly = jelly.Jelly(10150, 130, 0)  # 마지막은 타입
     tempjelly.enter()
     hurdle_jelly_List[JELLY].append(tempjelly)

@@ -1,4 +1,5 @@
 from pico2d import*
+import manager_effect_sound
 
 class Cookie:
     def __init__(self):
@@ -34,7 +35,7 @@ class Cookie:
     def enter(self):
         self.isFinishDead = False
 
-    def update(self, _events):
+    def update(self, _frametime, _events):
         #죽는지 확인
         if self.isDead == False:
             self.lifecount -= 0.3
@@ -58,11 +59,13 @@ class Cookie:
         for event in _events:
             if event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
                 if self.isJump == False:
+                    manager_effect_sound.CallEffectSound('JUMP')
                     self.isJump = True
                     self.frame = 0
             #슬라이딩 관련 키체크
             elif event.type == SDL_KEYDOWN and event.key == SDLK_DOWN and (not self.isJump):
                 self.isSliding = True
+                manager_effect_sound.CallEffectSound('LAND')
             elif event.type == SDL_KEYUP and event.key == SDLK_DOWN and (self.isSliding):
                 self.isSliding = False
                 self.frame = 0
@@ -79,8 +82,8 @@ class Cookie:
         #움직임
         if self.isHurdleCollision:
             if self.hurdleCollisionCount == 20:
-                self.x -= 50
-                self.cameraX -= 50
+                self.x -= 10 * 50 * _frametime
+                self.cameraX -= 10 * 50 * _frametime
 
             self.hurdleCollisionCount -= 1
             if self.hurdleCollisionCount < 0:

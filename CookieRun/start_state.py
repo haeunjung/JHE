@@ -20,7 +20,7 @@ def exit():
 
 
 
-def update():
+def update(_frametime):
     global start_logo_time
 
     if(start_logo_time < 0.0):

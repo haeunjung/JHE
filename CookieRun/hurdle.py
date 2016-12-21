@@ -20,10 +20,9 @@ class Hurdle:
                 self.sizeX, self.sizeY = 120, 448
                 self.image = load_image('Image\\Stage1_Fork2.png')
 
-
-
             #y좌표 조정
             self.y = 600 - (self.sizeY / 2)
+
         elif self.type == 1:
             if self.imagetype == 0:
                 self.sizeX, self.sizeY = 34, 50
